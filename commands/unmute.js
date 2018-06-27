@@ -22,8 +22,8 @@ module.exports.run = async (bot, message, args) => {
 	
 	let umuteEmbed = new Discord.RichEmbed()
 		.setDescription("Unmute")
-		.setColor("RED")
-		.addField("Unmuted User", `${mUser} with ID: ${mUser.id}`)
+		.setColor("GREEN")
+		.addField("Unmuted User", `${umUser} with ID: ${umUser.id}`)
 		.addField("Unmuted By", `<@${message.author.id}> with ID: ${message.author.id}`)
 		.addField("Unmuted In", message.channel)
 		.addField("Time", message.createdAt)
@@ -31,7 +31,8 @@ module.exports.run = async (bot, message, args) => {
 	
 	umUser.removeRole(muterole.id);
 	message.channel.send(":white_check_mark: ***" + `${umUser}` + "*** ***has been unmuted***");
-	bUser.send(`You have been unmuted from ${message.guild.name}`);
+	umUser.send(`You have been unmuted from ${message.guild.name}`);
+	message.delete().catch(O_o=>{});
 	umuteChannel.send(umuteEmbed);
 }
 

@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle("Mod Help")
 			.setDescription("'[]' are not included in the commands")
 			.addField("/warn [user] [reason]", "Warns a user")
-			.addField("/warnings [user]", "How many warnings a user has had")
+			.addField("/history [user]", "How many warnings a user has had")
 			.addField("/mute [user] [how long (I.E. 1m, 3d etc.)] [reason]", "Mutes a user for specified amount of time")
 			.addField("/unmute [user]", "Unmutes a user")
 			.addField("/kick [user] [reason]", "Kicks a user from the guild")
@@ -15,7 +15,6 @@ module.exports.run = async (bot, message, args) => {
 			.addField("/ban [user]", "Bans a user form the guild");
 		
 		message.channel.send(modEmbed);
-		message.delete().catch(O_o=>{});
 		return;
 }
 

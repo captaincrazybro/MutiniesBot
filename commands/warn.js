@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const ms = require("ms");
 let warns = require('../warnings.json');
+let reason = require('../warnings.json');
 
 module.exports.run = async (bot, message, args) => {
 	
@@ -21,18 +22,29 @@ module.exports.run = async (bot, message, args) => {
 		m.delete(5000);
 	});
 	
+	message.delete().catch(O_o=>{});
+	
 	if(!warns[wUser.id]) warns[wUser.id] = {
 		warns: 0
 	};
+
 	warns[wUser.id].warns++;
+	let warnlevel = warns[wUser.id].warns;
+	let reasonLvl = reason[wUser.id].reason;
 	
+	if(reasonLvl === ""){
+		reason[wUser.id].reason = `Warning ${warnlevel} for ${wReason}`;
+		return; 
+	}else{
+		reason[wUser.id].reason = `${reasonLvl} \nWarning ${warnlevel} for ${wReason}`;
+	}
 	fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
 		if (err) console.log(err);
 	});
 	
 	let warnEmbed = new Discord.RichEmbed()
 		.setDescription("Warn")
-		.setColor("ORRANGE")
+		.setColor(`#ffff00`)
 		.addField("Warned User", `${wUser} with ID: ${wUser.id}`)
 		.addField("Warned By", `<@${message.author.id}> with ID: ${message.author.id}`)
 		.addField("Warned In", message.channel)
@@ -49,7 +61,7 @@ module.exports.run = async (bot, message, args) => {
 	warnChannel.send(warnEmbed)
 	message.channel.send(":white_check_mark: ***" + `${wUser}` + "*** ***has been warned***");
 	message.delete().catch(O_o=>{});
-	bUser.send(`You have been warned in ${message.guild.name} for ${wReason}`);
+	wUser.send(`You have been warned in ${message.guild.name} for ${wReason}`);
 
 	if(warns[wuser.id].warns == 2){
 

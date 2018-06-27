@@ -39,7 +39,7 @@ module.exports.run = async (bot, message, args) => {
 	kickChannel.send(kickEmbed);
 	message.delete().catch(O_o=>{});
 	message.channel.send(":white_check_mark: ***" + `${kUser}` + "*** ***has been kicked***");
-	bUser.send(`You have been kicked form ${message.guild.name}`);
+	kUser.send(`You have been kicked form ${message.guild.name}`);
 }
 
 module.exports.help = {

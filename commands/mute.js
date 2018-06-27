@@ -1,5 +1,8 @@
 const Discord = require("discord.js");
 const ms = require("ms");
+const fs = require("fs");
+let mute = require('../mutehistory.json');
+let muteNumber = require('../mutehistory.json'); 
 
 module.exports.run = async (bot, message, args) => {
 	
@@ -88,9 +91,9 @@ module.exports.run = async (bot, message, args) => {
 		m.delete(5000);
 	});
 	
-	let muteEmbed = new Discord.RichEmbed()
+		let muteEmbed = new Discord.RichEmbed()
 		.setDescription("TempMute")
-		.setColor("RED")
+		.setColor("ORANGE")
 		.addField("Muted User", `${mUser} with ID: ${mUser.id}`)
 		.addField("Muted By", `<@${message.author.id}> with ID: ${message.author.id}`)
 		.addField("Muted In", message.channel)
@@ -98,10 +101,10 @@ module.exports.run = async (bot, message, args) => {
 		.addField("How Long", mutetime)
 		.addField("Reason", mReason); 	
 	
-	
+	message.delete().catch(O_o=>{});
 	await(mUser.addRole(muterole.id));
 	message.channel.send(":white_check_mark: ***" + `${mUser}` + "*** ***has been muted***");
-	bUser.send(`You have been muted in ${message.guild.name}`);
+	mUser.send(`You have been muted in ${message.guild.name}`);
 	
 	setTimeout(function(){
 		if(!mUser.roles.has(muterole.id)) return;
@@ -109,11 +112,31 @@ module.exports.run = async (bot, message, args) => {
 		message.channel.send(":white_check_mark: ***" + `${mUser}` + "*** ***has been unmuted***").then(m => {
 			message.delete().catch(O_o=>{});
 			m.delete(5000);
-		bUser.send(`You have been unmuted in ${message.guild.name}`);
+		mUser.send(`You have been unmuted in ${message.guild.name}`);
 		});
 	}, ms(mutetime));
 	message.delete().catch(O_o=>{});
 	muteChannel.send(muteEmbed);
+	
+	if(!muteNumber[mUser.id]) muteNumber[mUser.id] = {
+		muteNumber: ""
+	};
+	
+	let muteInfo = mute[mUser.id].mute;
+	if(mute[mUser.id].mute = "None"){
+		mute[mUser.id].mute = `Muted ${mutetime} for ${mReason}`;
+		return;
+	}
+	if(muteInfo === undefined){
+		mute[mUser.id].mute = `Muted ${mutetime} for ${mReason}`;
+		return;
+	}else{
+		mute[mUser.id].mute = `${muteInfo} \nMuted ${mutetime} for ${mReason}`;
+	}
+	
+	fs.writeFile("./mutehistory.json", JSON.stringify(mute), (err) => {
+		if (err) console.log(err);
+	});
 	
 	//End of module
 }
