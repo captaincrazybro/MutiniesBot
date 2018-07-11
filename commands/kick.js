@@ -1,4 +1,7 @@
 const Discord = require("discord.js");
+const fs = require("fs");
+let kick = require("../kickhistory.json");
+let kickNumber = require("../kickhistory.json");
 
 module.exports.run = async (bot, message, args) => {
 	let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
@@ -37,9 +40,20 @@ module.exports.run = async (bot, message, args) => {
 		
 	message.guild.member(kUser).kick(kReason); 
 	kickChannel.send(kickEmbed);
-	message.delete().catch(O_o=>{});
 	message.channel.send(":white_check_mark: ***" + `${kUser}` + "*** ***has been kicked***");
-	kUser.send(`You have been kicked form ${message.guild.name}`);
+	
+ 	if(!kick[kUser.id]) kick[kUser.id] = {
+		kick: `\n- Kicked ${message.createdAt} for ${kReason}`
+	} 
+	if(kick[kUser.id].kick === "None"){
+		kick[kUser.id].kick = `\n- Kicked ${message.createdAt} for ${kReason}`; 
+	}else{
+		let kickInfo = kick[kUser.id].kick;
+		kick[kUser.id] = {
+			kick: `${kickInfo} \n- Kicked on ${message.createdAt} for ${kReason}`
+		}
+	}
+
 }
 
 module.exports.help = {

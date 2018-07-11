@@ -32,7 +32,6 @@ module.exports.run = async (bot, message, args) => {
 	umUser.removeRole(muterole.id);
 	message.channel.send(":white_check_mark: ***" + `${umUser}` + "*** ***has been unmuted***");
 	umUser.send(`You have been unmuted from ${message.guild.name}`);
-	message.delete().catch(O_o=>{});
 	umuteChannel.send(umuteEmbed);
 }
 

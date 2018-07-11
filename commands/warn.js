@@ -33,14 +33,11 @@ module.exports.run = async (bot, message, args) => {
 	let reasonLvl = reason[wUser.id].reason;
 	
 	if(reasonLvl === ""){
-		reason[wUser.id].reason = `Warning ${warnlevel} for ${wReason}`;
+		reason[wUser.id].reason = `- Warning ${warnlevel} for ${wReason}`;
 		return; 
 	}else{
-		reason[wUser.id].reason = `${reasonLvl} \nWarning ${warnlevel} for ${wReason}`;
+		reason[wUser.id].reason = `${reasonLvl} \n- Warning ${warnlevel} for ${wReason}`;
 	}
-	fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
-		if (err) console.log(err);
-	});
 	
 	let warnEmbed = new Discord.RichEmbed()
 		.setDescription("Warn")
@@ -60,10 +57,9 @@ module.exports.run = async (bot, message, args) => {
 
 	warnChannel.send(warnEmbed)
 	message.channel.send(":white_check_mark: ***" + `${wUser}` + "*** ***has been warned***");
-	message.delete().catch(O_o=>{});
 	wUser.send(`You have been warned in ${message.guild.name} for ${wReason}`);
 
-	if(warns[wuser.id].warns == 2){
+	if(warns[wUser.id].warns == 2){
 
 	}
 	if(warns[wUser.id].warns === 2){
