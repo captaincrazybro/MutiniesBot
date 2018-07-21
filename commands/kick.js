@@ -2,6 +2,9 @@ const Discord = require("discord.js");
 const fs = require("fs");
 let kick = require("../kickhistory.json");
 let kickNumber = require("../kickhistory.json");
+const botConfig = require('../botconfig.json');
+let prefix = botConfig.prefix;
+
 
 module.exports.run = async (bot, message, args) => {
 	let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
@@ -53,9 +56,13 @@ module.exports.run = async (bot, message, args) => {
 			kick: `${kickInfo} \n- Kicked on ${message.createdAt} for ${kReason}`
 		}
 	}
+	
+    fs.writeFile("./kickhistory.json", JSON.stringify(kick), (err) => {
+        if (err) console.log(err);
+    });
 
 }
 
 module.exports.help = {
-	name: "kick"
+	name: `${prefix}kick`
 }

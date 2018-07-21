@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const ms = require("ms");
 let fs = require("fs");
 let ban = require("../banhistory.json");
+const botConfig = require('../botconfig.json');
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	let bUser = message.guild.member(message.mentions.users.first() || args[0]);
@@ -110,5 +112,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: "ban"
+	name: `${prefix}ban`
 }

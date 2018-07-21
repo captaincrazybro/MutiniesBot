@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const botConfig = require('../botconfig.json');
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	let ubUser = args[0];
@@ -34,5 +36,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "unban"
+    name: `${prefix}unban`
 }
