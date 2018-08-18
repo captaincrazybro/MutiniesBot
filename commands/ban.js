@@ -5,14 +5,14 @@ let ban = require("../banhistory.json");
 
 module.exports.run = async (bot, message, args) => {
 	let bUser = message.guild.member(message.mentions.users.first() || args[0]);
-	if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.channel.send(":x:" + " You do not have permission to execute this command").then(m => {
+	if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(":x:" + " ***You do not have permission to execute this command***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
 	});
 	if(!bUser) return message.channel.send(":x:" + " ***I can't fine that user***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
-	});
+	});c
 	if(bUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:" + " ***This user can not be banned!***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
