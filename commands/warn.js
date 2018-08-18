@@ -36,7 +36,6 @@ module.exports.run = async (bot, message, args) => {
 		m.delete(5000);
 	});
 	
-	message.delete().catch(O_o=>{});
 	
 	if(!warns[wUser.id]) warns[wUser.id] = {
 		warns: 0
