@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
 			.addField("/unmute [user]", "Unmutes a user")
 			.addField("/kick [user] [reason]", "Kicks a user from the guild")
 			.addField("/ban [user] [how long (I.E. 1m, 3d etc.)] [reason]", "Bans a user from the guild for a specified amount of time")
-			.addField("/ban [user]", "Bans a user form the guild");
+			.addField("/purge [number of messages]", "Deletes a certain ammount of messages");
 		
 		message.channel.send(modEmbed);
 		return;
