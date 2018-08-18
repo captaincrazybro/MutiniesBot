@@ -3,13 +3,25 @@ const fs = require("fs");
 const ms = require("ms");
 let warns = require('../warnings.json');
 let reason = require('../warnings.json');
-const botConfig = require('../botconfig.json');
-let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
-	
-	if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:" + " ***You do not have permissions to execute this command***");
+		
 	let wUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+	let trainrole = message.guild.roles.find(`name`, "Trainee");
+	let check = message.member.roles.has(trainrole.id);
+		
+ 	if(!check){
+		if(!message.member.hasPermission("MANAGE_MESSAGES")){
+			message.channel.send(":x:" + " ***You do not have permissions to execute this command***").then(m => {
+				message.delete().catch(O_o=>{});
+				m.delete(5000);
+			}); 
+			return;
+		}
+	}else{
+
+	}
+
 	if(!wUser) return message.channel.send(":x:" + " ***I couldn't find this user***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
@@ -70,5 +82,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: `${prefix}warn`
+	name: "warn"
 }

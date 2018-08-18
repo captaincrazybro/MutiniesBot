@@ -3,8 +3,6 @@ const ms = require("ms");
 const fs = require("fs");
 let mute = require('../mutehistory.json');
 let muteNumber = require('../mutehistory.json'); 
-const botConfig = require('../botconfig.json');
-let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	
@@ -137,15 +135,11 @@ module.exports.run = async (bot, message, args) => {
 
 	}, ms(mutetime));
 	
- 		if(!mute[mUser.id]) {
-			mute[mUser.id] = {
-				mute: `\n- Muted ${mutetime} for ${mReason}`
-			} 
-			return;
-		}
+ 		if(!mute[mUser.id]) mute[mUser.id] = {
+			mute: `\n- Muted ${mutetime} for ${mReason}`
+		} 
 		if(mute[mUser.id].mute === "None"){
-			mute[mUser.id].mute = `\n- Muted ${mutetime} for ${mReason}`
-			return;
+			mute[mUser.id].mute = `\n- Muted ${mutetime} for ${mReason}`; 
 		}else{
 			let muteInfo = mute[mUser.id].mute;
 			mute[mUser.id] = {
@@ -161,5 +155,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: `${prefix}mute`
+	name: "mute"
 }

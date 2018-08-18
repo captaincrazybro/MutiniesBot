@@ -1,6 +1,4 @@
 const Discord = require("discord.js");
-const botConfig = require('../botconfig.json');
-let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 		if(!message.member.hasPermission("MANAGE_MESSAGES")) return;
@@ -21,5 +19,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: `${prefix}help`
+	name: "help"
 }

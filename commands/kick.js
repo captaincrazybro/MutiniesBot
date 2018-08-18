@@ -2,12 +2,13 @@ const Discord = require("discord.js");
 const fs = require("fs");
 let kick = require("../kickhistory.json");
 let kickNumber = require("../kickhistory.json");
-const botConfig = require('../botconfig.json');
-let prefix = botConfig.prefix;
-
 
 module.exports.run = async (bot, message, args) => {
 	let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+	if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:" + " You do not have permission to execute this command").then(m => {
+		message.delete().catch(O_o=>{});
+		m.delete(5000);
+	}); 
 	if(!kUser) return message.channel.send(":x:" + " ***I can't fine that user***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
@@ -17,10 +18,6 @@ module.exports.run = async (bot, message, args) => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
 	});
-	if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:" + " You do not have permission to execute this command").then(m => {
-		message.delete().catch(O_o=>{});
-		m.delete(5000);
-	}); 
 	if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:" + " ***This user can not be kicked!***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
@@ -56,13 +53,9 @@ module.exports.run = async (bot, message, args) => {
 			kick: `${kickInfo} \n- Kicked on ${message.createdAt} for ${kReason}`
 		}
 	}
-	
-    fs.writeFile("./kickhistory.json", JSON.stringify(kick), (err) => {
-        if (err) console.log(err);
-    });
 
 }
 
 module.exports.help = {
-	name: `${prefix}kick`
+	name: "kick"
 }
