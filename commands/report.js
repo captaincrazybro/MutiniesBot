@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const botConfig = require("../botsettings.json");
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	
@@ -32,5 +34,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: "report"
+	name: `${prefix}report`
 }
