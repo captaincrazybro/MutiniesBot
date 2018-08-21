@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 let kick = require("../kickhistory.json");
 let kickNumber = require("../kickhistory.json");
-const botConfig = require("../botsettings.json");
+const botConfig = require("../botconfig.json");
 let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
