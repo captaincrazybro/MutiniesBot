@@ -3,6 +3,8 @@ const ms = require("ms");
 const fs = require("fs");
 let mute = require('../mutehistory.json');
 let muteNumber = require('../mutehistory.json'); 
+const botConfig = require("../botsettings.json");
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	
@@ -155,5 +157,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: "mute"
+	name: `${prefix}mute`
 }
