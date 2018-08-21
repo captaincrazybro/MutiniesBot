@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const fs = require("fs");
 let kick = require("../kickhistory.json");
 let kickNumber = require("../kickhistory.json");
+const botConfig = require("../botsettings.json");
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
@@ -57,5 +59,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: "kick"
+	name: `${prefix}kick`
 }
