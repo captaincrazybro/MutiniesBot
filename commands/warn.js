@@ -3,6 +3,8 @@ const fs = require("fs");
 const ms = require("ms");
 let warns = require('../warnings.json');
 let reason = require('../warnings.json');
+const botConfig = require("../botconfig.json");
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 		
@@ -81,5 +83,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: "warn"
+	name: `${prefix}warn`
 }
