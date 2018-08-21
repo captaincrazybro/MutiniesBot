@@ -39,7 +39,7 @@ bot.on("message", async message => {
 	let args = messageArray.slice(1);
 	let tUser = message.guild.member(message.guild.members.get(args[0]));
 	
-    let commandfile = bot.commands.get(cmd.slice(prefix.length));
+    let commandfile = bot.commands.get(cmd);
     if(commandfile) commandfile.run(bot,message,args,cmd,fs);
 	
 
