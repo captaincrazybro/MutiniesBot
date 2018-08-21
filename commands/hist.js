@@ -6,7 +6,7 @@ let reason = require('../warnings.json');
 let mute = require('../mutehistory.json');
 let kick = require('../kickhistory.json');
 let ban = require('../banhistory.json');
-const botConfig = require("../botsettings.json");
+const botConfig = require("../botconfig.json");
 let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
