@@ -25,7 +25,9 @@ module.exports.run = async (bot, message, args) => {
 	let reportschannel = message.guild.channels.find(`name`, "logs");
 	if(!reportschannel) return message.channel.send(":x:" + " ***Couldn't find reports channel.***");
 	reportschannel.send(reportEmbed);
-	message.channel.send(":white_check_mark: ***" + `${rUser}` + "*** ***has been reported***");
+	message.channel.send(":white_check_mark: ***" + `${rUser}` + "*** ***has been reported***").then(m => {
+		message.delete().catch(O_o=>{});
+	});
 		
 }
 
