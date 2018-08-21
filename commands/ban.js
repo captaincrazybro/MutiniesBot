@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const ms = require("ms");
 let fs = require("fs");
 let ban = require("../banhistory.json");
-const botConfig = require("../botsettings.json");
+const botConfig = require("../botconfig.json");
 let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
