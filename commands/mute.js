@@ -31,10 +31,7 @@ module.exports.run = async (bot, message, args) => {
 	let mutetime = args[1];
 	let mReason = args.slice(2).join(" ");
 	
-	if(mUser.roles.has(muterole.id)) return message.channel.send(":x:" + " ***This person is already muted***").then(m => {
-		message.delete().catch(O_o=>{});
-		m.delete(5000);
-	});
+	
 	
 	if(args.length === 1){
  	if(!muterole){
@@ -54,6 +51,11 @@ module.exports.run = async (bot, message, args) => {
 			console.log(e.stack);
 		}
 	}
+		
+			if(mUser.roles.has(muterole.id)) return message.channel.send(":x:" + " ***This person is already muted***").then(m => {
+		message.delete().catch(O_o=>{});
+		m.delete(5000);
+	});
 	//End of create role
 	
 	let muteEmbed = new Discord.RichEmbed()
