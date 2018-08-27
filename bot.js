@@ -22,6 +22,24 @@ fs.readdir("./commands/", (err, files) => {
     });
   });
   
+  url = "ws://echo.websocket.org";
+    try {
+       socket = window['MozWebSocket'] ? new MozWebSocket(url) : new WebSocket(url);
+       socket.onopen = function(){
+           console.log('Socket is now open.');
+       };
+       socket.onerror = function (error) {
+           console.error('There was an un-identified Web Socket error');
+       };
+       socket.onmessage = function (message) {
+           console.info("Message: %o", message.data);
+       };
+       socket.onclose = function() {
+           console.info( 'Socket is now closed.' );
+       }
+   } catch (e) {
+       console.error('Sorry, the web socket at "%s" is un-available', url);
+   }
   
 bot.on("ready", async () => {
 	console.log(`${bot.user.username} is online!`);
