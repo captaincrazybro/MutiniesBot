@@ -15,8 +15,8 @@ fs.readdir("./commands/", (err, files) => {
     }
   
     jsfile.forEach((f, i) =>{
-		let commandsCollection = new Discord.Collection();
-		let props = require(`./commands/${f}`);
+	let commandsCollection = new Discord.Collection();
+	let props = require(`./commands/${f}`);
       console.log(`${f} loaded!`);
       bot.commands.set(props.help.name, props);
     });
@@ -40,6 +40,9 @@ fs.readdir("./commands/", (err, files) => {
    } catch (e) {
        console.error('Sorry, the web socket at "%s" is un-available', url);
    }
+
+client.on('error', console.error);
+bot.on('error', e => console.log(e))
   
 bot.on("ready", async () => {
 	console.log(`${bot.user.username} is online!`);
