@@ -5,7 +5,7 @@ let prefix = botConfig.prefix;
 module.exports.run = async (bot, message, args) => {
 	
 	let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-	if(!rUser) return message.channel.send(":x:" + " ***I couldn't find this user***f").then(m => {
+	if(!rUser) return message.channel.send(":x:" + " ***I couldn't find this user***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
 	});
